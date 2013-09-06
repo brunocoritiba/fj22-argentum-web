@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+<<<<<<< HEAD
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
@@ -83,4 +84,40 @@
 
 </h:body>
 
+=======
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Coritiba</title>
+</head>
+<h:body>
+<p:panel header="Negociacoes" footer="Argentum Web">
+<h:form id="listaNegociacao">
+	<p:dataTable var="negociacao" value="#{argentumBean.negociacoes}">
+		<p:column headerText="Preço">
+			<h:outputText value="#{negociacao.preco}"/> 
+		</p:column>
+		
+		<p:column headerText="Quantidade">
+			<h:outputText value="#{negociacao.quantidade}"/>		
+		</p:column>
+		
+		<p:column headerText="Volume">
+			<h:outputText value="#{negociacao.volume}"/>		
+		</p:column>
+		
+		
+	</p:dataTable>
+
+
+</h:form>
+
+
+
+</p:panel>
+<h:commandButton value="ok" />
+
+</h:body>
+>>>>>>> 227b2b0a776d66cf05fdc50871a4e950ea575d3e
 </html>

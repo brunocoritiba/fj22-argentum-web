@@ -27,6 +27,9 @@ public class ClienteWebService {
 		} finally {
 			connection.disconnect();
 		}
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 227b2b0a776d66cf05fdc50871a4e950ea575d3e
 	}
 }
