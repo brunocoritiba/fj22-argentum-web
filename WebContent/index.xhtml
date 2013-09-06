@@ -1,73 +1,86 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>Argentum Web</title>
 </h:head>
 
 <h:body>
-	
-		<p:growl />
-		<h:form>
-			<p:panel header="Dados do Gráfico"> 		
-				<h:panelGrid columns="2">
-						<p:outputLabel for="titulo" value="Título: " />
-						<p:inputText id="titulo" value="#{argentumBean.titulo}" required="true">
-							<f:validateLength minimum="3" />
-						</p:inputText>
-						
-						<p:outputLabel for="indicador" value="Indicador: " />
-						<p:selectOneMenu id="indicador" value="#{argentumBean.nomeIndicador}">
-							<f:selectItem itemValue="IndicadorAbertura" itemLabel="Abertura" />
-							<f:selectItem itemValue="IndicadorFechamento" itemLabel="Fechamento" />
-						</p:selectOneMenu>
-						
-						<p:outputLabel for="media" value="Média: " />
-						<p:selectOneMenu id="media" value="#{argentumBean.nomeMedia}">
-							<f:selectItem itemValue="" itemLabel="Escolhe um" />
-							<f:selectItem itemValue="MediaMovelSimples" itemLabel="Simples" />
-							<f:selectItem itemValue="MediaMovelPonderada" itemLabel="Ponderada" />
-						</p:selectOneMenu>			
-							
-						<h:commandLink actionListener="#{argentumBean.preparaDados}" value="Gerar Gráfico"></h:commandLink>
-				</h:panelGrid>
-			</p:panel>
-		</h:form>
-		
-		<p:panel header="Negociações"> 
-			<p:lineChart value="#{argentumBean.modeloGrafico}" legendPosition="e" title="#{argentumBean.titulo}" rendered="#{argentumBean.modeloGrafico ne null}" />
+
+	<p:growl />
+	<h:form id="dadosGrafico">
+		<p:panel header="Dados do Gráfico">
+			<h:panelGrid ecolumns="2">
+				<p:outputLabel for="titulo" value="Título: " />
+				<p:inputText id="titulo" value="#{argentumBean.titulo}"
+					required="true">
+					<f:validateLength minimum="3" />
+				</p:inputText>
+
+				<p:outputLabel for="indicador" value="Indicador: " />
+				<p:selectOneMenu id="indicador"
+					value="#{argentumBean.nomeIndicador}">
+					<f:selectItem itemValue="IndicadorAbertura" itemLabel="Abertura" />
+					<f:selectItem itemValue="IndicadorFechamento"
+						itemLabel="Fechamento" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="media" value="Média: " />
+				<p:selectOneMenu id="media" value="#{argentumBean.nomeMedia}">
+					<f:selectItem itemValue="" itemLabel="Escolhe um" />
+					<f:selectItem itemValue="MediaMovelSimples" itemLabel="Simples" />
+					<f:selectItem itemValue="MediaMovelPonderada" itemLabel="Ponderada" />
+				</p:selectOneMenu>
+
+				<h:commandLink actionListener="#{argentumBean.preparaDados}"
+					value="Gerar Gráfico"></h:commandLink>
+			</h:panelGrid>
 		</p:panel>
-		
-		<p:dataTable var="negociacao" value="#{argentumBean.negociacoes}" paginator="true" rows="15">
-			
-			<p:column headerText="Preço" sortBy="#{negociacao.preco}" style="text-align:right;">
+	</h:form>
+
+	<p:panel header="Negociações">
+		<h:form>
+			<p:lineChart value="#{argentumBean.modeloGrafico}" legendPosition="e"
+				title="#{argentumBean.titulo}"
+				rendered="#{argentumBean.modeloGrafico != null}" />
+		</h:form>
+
+		<p:dataTable var="negociacao" value="#{argentumBean.negociacoes}"
+			paginator="true" rows="15"
+			rendered="#{argentumBean.negociacoes ne null}">
+
+			<p:column headerText="Preço" sortBy="#{negociacao.preco}"
+				style="text-align:right;">
 				<h:outputText value="#{negociacao.preco}">
 					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 				</h:outputText>
 			</p:column>
-		
-			<p:column headerText="Quantidade" sortBy="#{negociacao.quantidade}" style="text-align:right;">
+
+			<p:column headerText="Quantidade" sortBy="#{negociacao.quantidade}"
+				style="text-align:right;">
 				<h:outputText value="#{negociacao.quantidade}" />
-			</p:column>	
-		
-			<p:column headerText="Volume" sortBy="#{negociacao.volume}" style="text-align:right;">
+			</p:column>
+
+			<p:column headerText="Volume" sortBy="#{negociacao.volume}"
+				style="text-align:right;">
 				<h:outputText value="#{negociacao.volume}">
 					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 				</h:outputText>
-			</p:column>	
-		
-			<p:column headerText="Data" sortBy="#{negociacao.preco}" style="text-align:center;">
-				<h:outputText value="#{negociacao.data.time}" >
+			</p:column>
+
+			<p:column headerText="Data" sortBy="#{negociacao.preco}"
+				style="text-align:center;">
+				<h:outputText value="#{negociacao.data.time}">
 					<f:convertDateTime type="date"></f:convertDateTime>
 				</h:outputText>
-			</p:column>		
-		
-		</p:dataTable>	
-	
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+
 </h:body>
 
 </html>
